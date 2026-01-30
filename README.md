@@ -162,6 +162,6 @@ Przykładowa struktura notatki:
 ---
 
 ## Autor
-Uzupełnij: Ewelina Pacuła
+Ewelina Pacuła
 
 
