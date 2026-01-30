@@ -122,13 +122,13 @@ Raport Lighthouse (HTML):
 ## Uruchomienie lokalne
 > Service Worker działa tylko na **HTTPS** lub na **localhost** (nie z `file://`).
 
-### Opcja 1: *`serve`
-*```bash
-*npx serve 
-
-### Opcja 2: `http-server`
+### Opcja 1: "`serve`
 ```bash
-npx http-server
+npx serve "
+
+### Opcja 2: "`http-server`
+```bash
+npx http-server"
 
 Wejdź w przeglądarce na adres podany w konsoli (np. `http://localhost:3000` albo `http://localhost:8080`).
 
