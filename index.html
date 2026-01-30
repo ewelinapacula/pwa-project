@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <!-- Podstawowe meta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- PWA: kolor paska / motywu (np. na Androidzie w przeglądarce i po instalacji) -->
+  <meta name="theme-color" content="#2563eb" />
+
+  <!-- Ikony (favicons + PWA). Dla bezpieczeństwa zostawiamy kilka wariantów. -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+
+  <!-- PWA: manifest (instalowalność) -->
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <!-- Style aplikacji -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <title>Field Notes PWA</title>
+
+  <!-- Alternatywny favicon (nie szkodzi, a czasem pomaga w przeglądarkach) -->
+  <link rel="icon" href="/icons/icon-192.png">
+</head>
+
+<body>
+  <!-- Górny pasek nawigacji (spójny flow między widokami) -->
+  <header class="topbar">
+    <h1>Field Notes</h1>
+
+    <!-- Nawigacja: hash routing (3 widoki) -->
+    <nav>
+      <a href="#/home">Home</a>
+      <a href="#/add">Dodaj</a>
+      <a href="#/about">O aplikacji</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Offline UX: baner informujący o braku połączenia (wymaganie dodatkowe) -->
+    <div id="offlineBanner" class="banner hidden">
+      Brak internetu — działasz w trybie offline. Niektóre funkcje mogą być ograniczone.
+    </div>
+
+    <!-- WIDOK 1: Home (lista notatek + usuwanie/wyczyszczenie danych) -->
+    <section id="view-home" class="view">
+      <h2>Twoje notatki</h2>
+      <p class="muted">Notatki zapisują się lokalnie w przeglądarce.</p>
+
+      <!-- Lista notatek renderowana z localStorage -->
+      <ul id="notesList" class="list"></ul>
+
+      <!-- Kasowanie danych (localStorage) -->
+      <button id="clearBtn" class="danger">Wyczyść dane</button>
+    </section>
+
+    <!-- WIDOK 2: Dodaj (formularz + natywne funkcje: geo + kamera) -->
+    <section id="view-add" class="view hidden">
+      <h2>Dodaj notatkę</h2>
+
+      <label>Tytuł
+        <input id="titleInput" type="text" placeholder="np. Miejsce montażu" />
+      </label>
+
+      <label>Opis
+        <textarea id="textInput" rows="4" placeholder="Co chcesz zapisać?"></textarea>
+      </label>
+
+      <!-- Przyciski do funkcji natywnych -->
+      <div class="grid2">
+        <button id="geoBtn">Pobierz lokalizację</button>
+        <button id="camBtn">Uruchom kamerę</button>
+      </div>
+
+      <!-- Wynik geolokalizacji -->
+      <div class="card">
+        <div class="muted">Lokalizacja:</div>
+        <div id="geoOut">—</div>
+      </div>
+
+      <!-- Kamera: video (podgląd) + canvas (zrzut) + preview zdjęcia -->
+      <div class="card">
+        <video id="video" playsinline autoplay class="hidden"></video>
+        <canvas id="canvas" class="hidden"></canvas>
+
+        <div class="grid2">
+          <button id="snapBtn" class="hidden">Zrób zdjęcie</button>
+          <button id="stopCamBtn" class="hidden danger">Zatrzymaj kamerę</button>
+        </div>
+
+        <img id="photoPreview" class="hidden" alt="Podgląd zdjęcia" />
+      </div>
+
+      <button id="saveBtn" class="primary">Zapisz notatkę</button>
+      <div id="saveMsg" class="muted"></div>
+    </section>
+
+    <!-- WIDOK 3: About (opis spełnionych kryteriów) -->
+    <section id="view-about" class="view hidden">
+      <h2>O aplikacji</h2>
+      <ul>
+        <li>Instalowalna PWA (manifest + ikony)</li>
+        <li>Działa offline (Service Worker + Cache API)</li>
+        <li>Natywne funkcje: geolokalizacja + kamera</li>
+        <li>Min. 3 widoki (Home / Dodaj / O aplikacji)</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Logika aplikacji w JS -->
+  <script src="app.js"></script>
+</body>
+</html>
