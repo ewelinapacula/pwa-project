@@ -122,9 +122,9 @@ Raport Lighthouse (HTML):
 ## Uruchomienie lokalne
 > Service Worker działa tylko na **HTTPS** lub na **localhost** (nie z `file://`).
 
-### Opcja 1: `serve`
-```bash
-npx serve 
+### Opcja 1: *`serve`
+*```bash
+*npx serve 
 
 ### Opcja 2: `http-server`
 ```bash
